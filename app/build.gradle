@@ -1,0 +1,43 @@
+plugins { id 'com.android.application' }
+
+def signingFile = rootProject.file('.signing/signing.properties')
+def signingValues = new Properties()
+if (signingFile.exists()) signingFile.withInputStream { signingValues.load(it) }
+
+android {
+    namespace 'pe.gustavo.telefonolite'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'pe.gustavo.telefonolite'
+        minSdk 28
+        targetSdk 35
+        versionCode 3
+        versionName '0.2.1'
+        testInstrumentationRunner 'android.test.InstrumentationTestRunner'
+    }
+    signingConfigs {
+        localRelease {
+            if (signingFile.exists()) {
+                storeFile rootProject.file('.signing/telefonolite.p12')
+                storePassword signingValues['storePassword']
+                keyAlias 'telefonolite'
+                keyPassword signingValues['storePassword']
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (signingFile.exists()) signingConfig signingConfigs.localRelease
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    lint { abortOnError true }
+    useLibrary 'android.test.runner', false
+    useLibrary 'android.test.base', false
+}

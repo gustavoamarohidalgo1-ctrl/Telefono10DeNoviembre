@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Teléfono Lite</string>
+    <string name="call_ended">Llamada finalizada</string>
+</resources>

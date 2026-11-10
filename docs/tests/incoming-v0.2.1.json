@@ -1,0 +1,21 @@
+{
+  "serial": "emulator-5554",
+  "checks": {
+    "main_answer_dnd_and_active": {
+      "pass": true
+    },
+    "main_reject_dnd": {
+      "pass": true
+    },
+    "home_heads_up": {
+      "pass": true
+    },
+    "locked_incoming": {
+      "pass": true
+    },
+    "silent_channel": {
+      "pass": true
+    }
+  },
+  "note": "Synthetic emulator calls; no acoustic verification."
+}
